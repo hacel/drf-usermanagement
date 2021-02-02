@@ -2,10 +2,13 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
 
-class UserSerializer(serializers.Serializer):
-    username = serializers.CharField()
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
     is_admin = serializers.BooleanField(required=False)
+
+    class Meta:
+        model = User
+        fields = ["url", "username", "password", "is_admin"]
 
     def to_representation(self, instance):
         ret = super().to_representation(instance)
@@ -14,8 +17,10 @@ class UserSerializer(serializers.Serializer):
         return ret
 
     def create(self, validated_data):
-        # if "password" not in validated_data:
-        #     raise
+        if "password" not in validated_data:
+            raise serializers.ValidationError({
+                'password': 'This field is required.'
+            })
         user = User.objects.create_user(
             validated_data["username"], password=validated_data.get("password")
         )

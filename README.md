@@ -41,7 +41,3 @@
     # Delete User
     curl -X DELETE http://localhost:8000/api/0.1/user/<pk>/
 
-
-## Todo
-
-- Duplicate entries handling
