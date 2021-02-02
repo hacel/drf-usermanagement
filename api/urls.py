@@ -5,10 +5,8 @@ from api import views
 
 
 urlpatterns = [
-    # path("user/", views.UserList.as_view()),
-    # path("user/<int:pk>/", views.UserDetail.as_view()),
-    path("user/", views.user_list),
-    path("user/<int:pk>/", views.user_detail),
+    path("user/", views.UserList.as_view()),
+    path("user/<int:pk>/", views.UserDetail.as_view()),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("token-auth/", token.obtain_auth_token),
 ]

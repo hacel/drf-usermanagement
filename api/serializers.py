@@ -8,8 +8,8 @@ class UserSerializer(serializers.Serializer):
     is_admin = serializers.BooleanField(required=False)
 
     def create(self, validated_data):
-        if "password" not in validated_data:
-            raise
+        # if "password" not in validated_data:
+        #     raise
         user = User.objects.create_user(
             validated_data["username"], password=validated_data.get("password")
         )
@@ -19,8 +19,7 @@ class UserSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         instance.username = validated_data.get("username", instance.username)
-        # if instance.check_password(validated_data.get("password")):
-        # instance.set_password(validated_data.get("password"))
+        instance.set_password(validated_data.get("password"))
         make_admin = validated_data.get("is_admin")
         if make_admin is not None:
             if make_admin is True:
@@ -29,12 +28,3 @@ class UserSerializer(serializers.Serializer):
                 instance.groups.remove(Group.objects.get(name="Administrators"))
         instance.save()
         return instance
-
-
-"""
-{
-    "username": "11",
-    "password": "inr2u3",
-    "is_admin": true
-}
-"""
