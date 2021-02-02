@@ -39,4 +39,3 @@
 ## Todo
 
 - Duplicate entries handling
-- Update response should include `is_admin`

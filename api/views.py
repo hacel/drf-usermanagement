@@ -43,11 +43,11 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     def retrieve(self, request, pk):
         user = self.get_object()
         serializer = UserSerializer(user)
-        data = {
+        ret = {
             "username": serializer.data["username"],
             "is_admin": user.groups.filter(name="Administrators").exists(),
         }
-        return Response(data)
+        return Response(ret)
 
     def update(self, request, pk):
         instance = self.get_object()
@@ -69,4 +69,8 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
                 instance.groups.remove(
                     Group.objects.get(name="Administrators"))
         instance.save()
-        return Response(serializer.data)
+        ret = {
+            "username": data["username"],
+            "is_admin": instance.groups.filter(name="Administrators").exists(),
+        }
+        return Response(ret)
