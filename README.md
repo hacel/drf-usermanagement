@@ -1,1 +1,42 @@
 # Learning authentication and user management on drf
+
+
+## Endpoints
+
+    # GET, POST
+    localhost:8000/api/0.1/user/
+    
+    # GET, PUT, DELETE
+    localhost:8000/api/0.1/user/<pk>
+
+## Fields
+
+    {
+        "username": "<username>",
+        "password": "<password>",
+        "is_admin": "<True/False>"
+    }
+
+
+### Examples
+
+    # Get User List
+    curl -H "Accepts: application/json" http://localhost:8000/api/0.1/user/
+    
+    # Create User
+    curl -H "Content-Type: application/json" -d '{"username": "<username>", "password": "<password>", "is_admin": <bool>} http://localhost:8000/api/0.1/user/
+
+    # Get User
+    curl -H "Accepts: application/json" http://localhost:8000/api/0.1/user/<pk>/
+
+    # Update User
+    curl -H "Content-Type: application/json" -d '{"username": "<username>", "password": "<password>", "is_admin": <bool>} http://localhost:8000/api/0.1/user/<pk>/
+
+    # Delete User
+    curl -X DELETE http://localhost:8000/api/0.1/user/<pk>/
+
+
+## Todo
+
+- Duplicate entries handling
+- Update response should include `is_admin`
