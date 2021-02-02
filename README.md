@@ -9,6 +9,9 @@
     # GET, PUT, DELETE
     localhost:8000/api/0.1/user/<pk>
 
+    # POST
+    localhost:8000/api/0.1/token-auth/
+
 ## Fields
 
     {
@@ -19,6 +22,9 @@
 
 
 ### Examples
+
+    # Get Authentication Token
+    curl -H "Content-Type: application/json" -d '{"username":"<username>", "password":"<password>"}' http://localhost:8000/api/0.1/token-auth/
 
     # Get User List
     curl -H "Accepts: application/json" http://localhost:8000/api/0.1/user/
