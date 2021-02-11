@@ -8,7 +8,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ["url", "username", "password", "is_admin"]
+        fields = ["url", "id", "username", "password", "is_admin"]
 
     def to_representation(self, instance):
         ret = super().to_representation(instance)
